@@ -42,7 +42,21 @@ Returns a fallback string (not an error) when `retrieved_chunks` is empty.
 *How will you format the retrieved chunks before passing them to the LLM? Describe the structure — not the code. Consider: will you label chunks by game? Include distance scores? Separate chunks with delimiters?*
 
 ```
-[your answer here]
+I will format the retrieved chunks as clearly separated sources, with each chunk labeled by its game and retrieval rank. For example:
+
+--- Chunk 1 ---
+Game: Catan
+Distance: 0.18
+Text: [chunk text]
+
+--- Chunk 2 ---
+Game: Ticket to Ride
+Distance: 0.24
+Text: [chunk text]
+
+Each chunk will be separated by a delimiter so the model can distinguish where one source ends and another begins. Including the game name helps the model avoid mixing rules from different games. I would include distance scores as metadata for debugging and transparency, but instruct the model to primarily rely on the chunk content rather than the score itself.
+
+This structure makes it easier for the LLM to attribute information to the correct source and reduces the chance of combining rules from multiple games into a single answer.
 ```
 
 ---
@@ -52,7 +66,7 @@ Returns a fallback string (not an error) when `retrieved_chunks` is empty.
 *Write the exact system prompt instruction you will use to prevent the model from answering beyond the retrieved text. This is the most important design decision in this function.*
 
 ```
-[your answer here]
+Answer using only the rule text provided below. If the answer is not contained in the provided text, say so explicitly — do not draw on outside knowledge or fill in gaps from what you know about board games.
 ```
 
 ---

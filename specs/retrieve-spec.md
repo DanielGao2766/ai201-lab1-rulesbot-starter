@@ -45,7 +45,7 @@ Results should be ordered from most to least relevant (lowest to highest distanc
 *Describe how you will use `_collection.query()` to find relevant chunks. What arguments will you pass, and why?*
 
 ```
-[your answer here]
+I will pass the query text and the k number of results that I want
 ```
 
 ---
@@ -55,7 +55,11 @@ Results should be ordered from most to least relevant (lowest to highest distanc
 *Sketch out what one item in your return list looks like as a concrete example. Where does each field come from in the query results?*
 
 ```
-[your answer here]
+{
+    "Chunk Num": [["doc1", "doc2", "doc3"]],
+    "Name": [["Catan", "Catan", "Catan"]],
+    "distances": [[0.12, 0.18, 0.24]]
+}
 ```
 
 ---
@@ -65,7 +69,7 @@ Results should be ordered from most to least relevant (lowest to highest distanc
 *`_collection.query()` returns nested lists. Describe what index you need to access to get the actual list of results for a single query, and why the nesting exists.*
 
 ```
-[your answer here]
+results["Name"][0]
 ```
 
 ---
